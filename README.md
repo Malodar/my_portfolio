@@ -1,0 +1,1 @@
+## This is my NEXTJS learning project together with FastAPI for some backend requests and administration
