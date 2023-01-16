@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import React from 'react'
 import { AiOutlineMail } from 'react-icons/ai'
-import { BsFillPersonFill } from 'react-icons/bs'
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
-import {HiOutlineChevronDoubleUp} from 'react-icons/hi'
+import { FaGithub, FaLinkedinIn, FaFacebook } from 'react-icons/fa'
+import { HiOutlineChevronDoubleUp } from 'react-icons/hi'
+import {socials} from '../editable_stuff/config'
 
 const Contact = () => {
   return (
@@ -28,16 +28,24 @@ const Contact = () => {
                 <p className='uppercase pt-8'>Connect With Me</p>
                 <div className='flex items-center justify-between py-4'>
                   <div className='rounded-full shadow-lg shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300'>
-                    <FaLinkedinIn />
+                    <Link target='_blank' href={socials.find(i => i.name === 'linkedin').url}>
+                      <FaLinkedinIn />
+                    </Link>
                   </div>
                   <div className='rounded-full shadow-lg shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300'>
-                    <FaGithub />
+                    <Link target='_blank' href={socials.find(i => i.name === 'github').url}>
+                      <FaGithub />
+                    </Link>
                   </div>
                   <div className='rounded-full shadow-lg shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300'>
-                    <AiOutlineMail />
+                    <Link target='_blank' href={socials.find(i => i.name === 'facebook').url}>
+                      <FaFacebook />
+                    </Link>
                   </div>
                   <div className='rounded-full shadow-lg shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300'>
-                    <BsFillPersonFill />
+                    <Link href={`mailto:${socials.find(i => i.name === 'email').url}?subject=Hi! I found your portfolio website and wanted send you a message`}>
+                      <AiOutlineMail />
+                    </Link>
                   </div>
                 </div>
               </div>

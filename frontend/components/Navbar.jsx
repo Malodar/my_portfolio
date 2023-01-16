@@ -2,9 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, {useState, useEffect} from 'react'
 import {AiOutlineMenu, AiOutlineClose, AiOutlineMail} from 'react-icons/ai'
-import {FaGithub, FaLinkedinIn} from 'react-icons/fa'
-import {BsFillPersonLinesFill} from 'react-icons/bs'
+import {FaGithub, FaLinkedinIn, FaFacebook} from 'react-icons/fa'
 import { useRouter } from 'next/router'
+import {socials} from '../editable_stuff/config'
 
 const Navbar = () => {
   const [nav, setNav] = useState(false)
@@ -48,7 +48,7 @@ const Navbar = () => {
     <div style={{backgroundColor: `${navBg}`}} className={shadow ? 'fixed w-full h-20 shadow-xl z-[100]' : 'fixed w-full h-20 z-[100]'}>
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
         <Link href='/'>
-          <Image src="/assets/navLogo.png" alt="NavLogo" width="100" height="50" />
+          <Image src="/assets/AK2-removebg-preview.png" alt="NavLogo" width="120" height="50" />
         </Link>
         <div>
           <ul style={{color: `${linkColor}`}} className='hidden md:flex'>
@@ -88,7 +88,7 @@ const Navbar = () => {
               </div>
             </div>
             <div className='border-b border-gray-300 my-4'>
-              <p className='w-[85%] md:w-[90%] py-4'>Let's build something legendary together</p>
+              <p className='w-[85%] md:w-[90%] py-4'>Let's build something exceptional together</p>
             </div>
           </div>
           <div className='py-4 flex flex-col'>
@@ -113,16 +113,24 @@ const Navbar = () => {
               <p className='uppercase tracking-widest text-[#5651e5]'>Let's Connect</p>
               <div className='flex items-center justify-between my-4 w-full sm:w-[80%]'>
                 <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-                  <FaLinkedinIn />
+                  <Link target='_blank' href={socials.find(i => i.name === 'linkedin').url}>
+                    <FaLinkedinIn />
+                  </Link>
                 </div>
                 <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-                  <FaGithub />
+                  <Link target='_blank' href={socials.find(i => i.name === 'github').url}>
+                    <FaGithub />
+                  </Link>
                 </div>
                 <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-                  <AiOutlineMail />
+                  <Link target='_blank' href={socials.find(i => i.name === 'facebook').url}>
+                    <FaFacebook />
+                  </Link>
                 </div>
                 <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-105 ease-in duration-300'>
-                  <BsFillPersonLinesFill />
+                  <Link href={`mailto:${socials.find(i => i.name === 'email').url}?subject=Hi! I found your portfolio website and wanted send you a message`}>
+                    <AiOutlineMail />
+                  </Link>
                 </div>
               </div>
             </div>

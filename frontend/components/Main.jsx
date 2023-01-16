@@ -1,7 +1,8 @@
 import React from 'react'
-import {FaGithub, FaLinkedinIn} from 'react-icons/fa'
-import {BsFillPersonLinesFill} from 'react-icons/bs'
+import {FaGithub, FaLinkedinIn, FaFacebook} from 'react-icons/fa'
 import {AiOutlineMail} from 'react-icons/ai'
+import {socials} from '../editable_stuff/config'
+import Link from 'next/link'
 
 const Main = () => {
   return (
@@ -20,16 +21,24 @@ const Main = () => {
           </p>
           <div className='flex items-center justify-between max-w-[330px] m-auto py-4'>
             <div className='rounded-full shadow-lg shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300'>
-              <FaLinkedinIn />
+              <Link target='_blank' href={socials.find(i => i.name === 'linkedin').url}>
+                <FaLinkedinIn />
+              </Link>
             </div>
             <div className='rounded-full shadow-lg shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300'>
-              <FaGithub />
+              <Link target='_blank' href={socials.find(i => i.name === 'github').url}>
+                <FaGithub />
+              </Link>
             </div>
             <div className='rounded-full shadow-lg shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300'>
-              <AiOutlineMail />
+              <Link target='_blank' href={socials.find(i => i.name === 'facebook').url}>
+                <FaFacebook />
+              </Link>
             </div>
             <div className='rounded-full shadow-lg shadow-gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300'>
-              <BsFillPersonLinesFill />
+              <Link href={`mailto:${socials.find(i => i.name === 'email').url}?subject=Hi! I found your portfolio website and wanted send you a message`}>
+                <AiOutlineMail />
+              </Link>
             </div>
           </div>
         </div>
