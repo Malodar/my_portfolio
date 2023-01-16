@@ -1,11 +1,50 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlineMail } from 'react-icons/ai'
 import { FaGithub, FaLinkedinIn, FaFacebook } from 'react-icons/fa'
 import { HiOutlineChevronDoubleUp } from 'react-icons/hi'
 import {socials} from '../editable_stuff/config'
 
+
 const Contact = () => {
+  
+  const [senderEmail, setSenderEmail] = useState('')
+  const [name, setName] = useState('')
+  const [subject, setSubject] = useState('')
+  const [message, setMessage] = useState('')
+
+
+  const SendMail = (e)=>{
+    e.preventDefault();
+    let data = {
+      senderEmail,
+      name,
+      subject,
+      message
+    }
+
+    fetch('/api/email', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then((res) => {
+      console.log(`Response received`)
+      if (res.status === 200) {
+        console.log('Response succeeded!')
+        setSenderEmail('')
+        setName('')
+        setSubject('')
+        setMessage('')
+      }
+      else {
+        console.log(res.statusText)
+      }
+    })
+  }
+
   return (
     <div id='contact' className='w-full lg:h-screen'>
       <div className='max-w-[1240px] m-auto px-2 py-16 w-full'>
@@ -57,33 +96,29 @@ const Contact = () => {
             <div className='p-4'>
               <form>
                 
-                <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
+                <div className='flex flex-col py-2'>
                   <div className='flex flex-col'>
                     <label className='uppercase text-sm py-2'>Name</label>
-                    <input type="text" className='border-2 rounded-lg p-3 flex border-gray-300'/>
-                  </div>
-                  <div className='flex flex-col'>
-                    <label className='uppercase text-sm py-2'>Phone Number</label>
-                    <input type="text" className='border-2 rounded-lg p-3 flex border-gray-300'/>
+                    <input type="text" value={name} onChange={(e)=>setName(e.target.value)} className='border-2 rounded-lg p-3 flex border-gray-300'/>
                   </div>
                 </div>
 
                 <div className='flex flex-col py-2'>
                   <label className='uppercase text-sm py-2'>Email</label>
-                  <input type="email" className='border-2 rounded-lg p-3 flex border-gray-300'/>
+                  <input type="email" value={senderEmail} onChange={(e)=>setSenderEmail(e.target.value)} required className='border-2 rounded-lg p-3 flex border-gray-300'/>
                 </div>
 
                 <div className='flex flex-col py-2'>
                   <label className='uppercase text-sm py-2'>Subject</label>
-                  <input type="text" className='border-2 rounded-lg p-3 flex border-gray-300'/>
+                  <input type="text" value={subject} onChange={(e)=>setSubject(e.target.value)} className='border-2 rounded-lg p-3 flex border-gray-300'/>
                 </div>
 
                 <div className='flex flex-col py-2'>
                   <label className='uppercase text-sm py-2'>Message</label>
-                  <textarea type="text" className='border-2 rounded-lg p-3 flex border-gray-300' rows='10'></textarea>
+                  <textarea type="text" value={message} onChange={(e)=>setMessage(e.target.value)} className='border-2 rounded-lg p-3 flex border-gray-300' rows='10'></textarea>
                 </div>
 
-                <button className='w-full p-4 text-gray-100 mt-4'>Send Message</button>
+                <button onClick={SendMail} className='w-full p-4 text-gray-100 mt-4'>Send Message</button>
 
               </form>
             </div>
